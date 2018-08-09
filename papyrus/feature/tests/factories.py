@@ -28,5 +28,5 @@ class FeatureFactory(factory.DjangoModelFactory):
     priority = fuzzy.FuzzyInteger(1, 100)
     product_area = fuzzy.FuzzyChoice(['1', '2', '3', '4'])
     status = fuzzy.FuzzyChoice(['1', '2', '3', '4'])
-    target_date = datetime.date(2008,1,1)
+    target_date = datetime.date(2008, 1, 1)
     title = fuzzy.FuzzyText(length=50)
