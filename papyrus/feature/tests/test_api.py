@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from factories import FeatureFactory
+from .factories import FeatureFactory
 
 
 @pytest.fixture

@@ -12,4 +12,4 @@ class FeatureResource(DjangoResource):
     })
 
     def list(self):
-      return Feature.objects.all()
+        return Feature.objects.all()
