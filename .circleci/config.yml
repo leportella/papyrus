@@ -5,19 +5,31 @@ jobs:
       - image: circleci/python:3.7.0
     working_directory: ~/papyrus
     steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Pipfile.lock" }}
+          # fallback to using ddthe latest cache if no exact match is found
+          - v1-dependencies-
 
       - run:
           name: install system dependencies
-          command: sudo pip install pipenv --upgrade
+          command: pip install pipenv --upgrade
 
       - run:
           name: install dependencies
-          command: sudo pipenv install --dev
+          command: pipenv install --dev --deploy
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
 
       - run:
           name: run tests
-          command: sudo pipenv run pytest
+          command: pipenv run pytest
 
       - run:
           name: run flake8
-          command: sudo pipenv run flake8 . --output-file test-reports
+          command: pipenv run flake8 . --output-file test-reports
