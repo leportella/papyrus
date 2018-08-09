@@ -12,12 +12,12 @@ jobs:
 
       - run:
           name: install dependencies
-          command: pipenv install --dev --deploy
+          command: sudo pipenv install --dev
 
       - run:
           name: run tests
-          command: pipenv run pytest
+          command: sudo pipenv run pytest
 
       - run:
           name: run flake8
-          command: pipenv run flake8 . --output-file test-reports
+          command: sudo pipenv run flake8 . --output-file test-reports
