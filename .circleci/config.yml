@@ -27,6 +27,10 @@ jobs:
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
 
       - run:
+          name: define env variables 
+          command: cat env-template > .env 
+
+      - run:
           name: run tests
           command: pipenv run pytest papyrus
 
