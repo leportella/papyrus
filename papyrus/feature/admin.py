@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Feature
+
+
+@admin.register(Feature)
+class FeatureAdmin(admin.ModelAdmin):
+    ordering = ('-target_date',)
