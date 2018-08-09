@@ -17,6 +17,7 @@ jobs:
       - run:
           name: run tests
           command: pipenv run pytest
+
       - run:
-        name: run flake8
-        command: pipenv run flake8 . --output-file test-reports
+          name: run flake8
+          command: pipenv run flake8 . --output-file test-reports
