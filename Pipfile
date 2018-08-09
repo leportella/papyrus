@@ -5,6 +5,7 @@ name = "pypi"
 
 [dev-packages]
 django-extensions = "*"
+factory-boy = "*"
 
 [packages]
 django = "==2.1"
