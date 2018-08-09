@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.0
+    working_directory: ~/papyrus
+    steps:
+
+      - run:
+          name: install system dependencies
+          command: sudo pip install pipenv --upgrade
+
+      - run:
+          name: install dependencies
+          command: pipenv install --dev --deploy
+
+      - run:
+          name: run tests
+          command: pipenv run pytest
+      - run:
+        name: run flake8
+        command: pipenv run flake8 . --output-file test-reports
