@@ -36,4 +36,4 @@ jobs:
 
       - run:
           name: run flake8
-          command: pipenv run flake8 . --output-file test-reports
+          command: pipenv run flake8 papyrus --output-file test-reports
