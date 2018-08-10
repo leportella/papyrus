@@ -4,30 +4,33 @@ import pytest
 
 from django.contrib.auth.models import User
 
+from feature.models import Feature
 from .factories import FeatureFactory
 
 
-def data(user):
+@pytest.fixture
+def body():
     return {
         'description': 'This is a description',
         'priority': 1,
         'product_area': '4',
         'target_date': '2018-08-08',
         'title': 'new_priority_1',
-        'client': user.id,
+        'client': 'A',
     }
 
 
 def post(client, url, body):
-    response = client.post(url, body, content_type="application/json")
+    response = client.post(url, json.dumps(body),
+                           content_type="application/json")
     return json.loads(response.content)
 
 
 @pytest.fixture
 def user():
     user = User.objects.create_user(username='john.snow', password='targaryen')
-    FeatureFactory(title='priority_1', client=user, priority=1)
-    FeatureFactory(title='priority_2', client=user, priority=2)
+    FeatureFactory(title='priority_1', client='A', priority=1)
+    FeatureFactory(title='priority_2', client='A', priority=2)
     return user
 
 
@@ -44,22 +47,17 @@ def test_list_features(client, user):
 
 
 @pytest.mark.django_db
-def test_create_feature_reprioritizing(client, user):
+def test_create_feature_reprioritizing(client, user, body):
     authenticate(client)
-    body = json.dumps(data(user))
     content = post(client, '/features/', body)
 
     assert content['priority'] == 1
     assert content['feature_title'] == 'new_priority_1'
-    assert content['client_name'] == user.email
+    assert content['client'] == 'John Snow'
 
-    for feature in user.features.all():
-        if feature.title == 'new_priority_1':
-            assert feature.priority == 1
-        if feature.title == 'priority_1':
-            assert feature.priority == 2
-        if feature.title == 'priority_2':
-            assert feature.priority == 3
+    assert Feature.objects.get(title='new_priority_1').priority == 1
+    assert Feature.objects.get(title='priority_1').priority == 2
+    assert Feature.objects.get(title='priority_2').priority == 3
 
 
 @pytest.mark.django_db
@@ -71,9 +69,8 @@ def test_create_feature_reprioritizing(client, user):
     'client',
     'title'
 ])
-def test_create_feature_errors(client, user, attribute):
+def test_create_feature_errors(client, user, body, attribute):
     authenticate(client)
-    body = data(user)
     body.pop(attribute)
     content = post(client, '/features/', body)
     assert content['error'][attribute] == ['This field is required.']
