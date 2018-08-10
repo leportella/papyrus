@@ -12,12 +12,12 @@ from .models import Feature
 class FeatureResource(DjangoResource):
     preparer = FieldsPreparer(fields={
         'priority': 'priority',
-        'client_name': 'client.email',
+        'client': 'get_client_display',
         'feature_title': 'title',
     })
 
     def is_authenticated(self):
-        return True
+        return self.request.user.is_authenticated
 
     def list(self):
         return Feature.objects.all()
