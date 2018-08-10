@@ -20,7 +20,8 @@ STATUS_CHOICE = (
 
 class Feature(models.Model):
 
-    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    client = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='features')
     description = models.TextField()
     priority = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     product_area = models.CharField(max_length=1, choices=AREAS_CHOICE)
