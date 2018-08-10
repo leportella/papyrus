@@ -17,7 +17,7 @@ class FeatureResource(DjangoResource):
     })
 
     def is_authenticated(self):
-        return True
+        return self.request.user.is_authenticated
 
     def list(self):
         return Feature.objects.all()

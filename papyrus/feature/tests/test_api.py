@@ -2,7 +2,9 @@ import json
 
 import pytest
 
-from .factories import FeatureFactory, UserFactory
+from django.contrib.auth.models import User
+
+from .factories import FeatureFactory
 
 
 def data(user):
@@ -15,20 +17,27 @@ def data(user):
         'client': user.id,
     }
 
+
 def post(client, url, body):
     response = client.post(url, body, content_type="application/json")
     return json.loads(response.content)
 
+
 @pytest.fixture
 def user():
-    user = UserFactory()
+    user = User.objects.create_user(username='john.snow', password='targaryen')
     FeatureFactory(title='priority_1', client=user, priority=1)
     FeatureFactory(title='priority_2', client=user, priority=2)
     return user
 
 
+def authenticate(client):
+    client.login(username='john.snow', password='targaryen')
+
+
 @pytest.mark.django_db
 def test_list_features(client, user):
+    authenticate(client)
     response = client.get('/features/')
     content = json.loads(response.content)
     assert len(content['objects']) == 2
@@ -36,6 +45,7 @@ def test_list_features(client, user):
 
 @pytest.mark.django_db
 def test_create_feature_reprioritizing(client, user):
+    authenticate(client)
     body = json.dumps(data(user))
     content = post(client, '/features/', body)
 
@@ -62,7 +72,8 @@ def test_create_feature_reprioritizing(client, user):
     'title'
 ])
 def test_create_feature_errors(client, user, attribute):
+    authenticate(client)
     body = data(user)
     body.pop(attribute)
     content = post(client, '/features/', body)
-    assert content['error'][attribute] ==  ['This field is required.']
+    assert content['error'][attribute] == ['This field is required.']
