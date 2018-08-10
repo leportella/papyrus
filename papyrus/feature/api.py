@@ -1,7 +1,6 @@
 from restless.dj import DjangoResource
 from restless.preparers import FieldsPreparer
 
-from django.contrib.auth.models import User
 from django.db import transaction
 from django.forms import ValidationError
 from django.db.models import F
