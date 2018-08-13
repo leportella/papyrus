@@ -28,7 +28,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">Target Date</th>
                 <th scope="col">Client</th>
                 <th scope="col">Priority</th>
                 <th scope="col">Title</th>
@@ -36,10 +36,10 @@
             </thead>
             <tbody>
               <tr v-for="feature in features">
-                <th scope="row">${feature.id}</th>
+                <th scope="row">${feature.target_date}</th>
                 <td>${feature.client}</td>
                 <td>${feature.priority}</td>
-                <td>${feature.feature_title}</td>
+                <td>${feature.title}</td>
               </tr>
             </tbody>
           </table>
