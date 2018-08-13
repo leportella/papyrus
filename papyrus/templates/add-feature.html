@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Papyrus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple app to add tickets of new features">
+    <meta name="keywords" content="vuejs, django, crudapp, restapi">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1 class="text-center" style="padding: 50px;"> 📜 Welcome to Papyrus 📜</h1>
+    <div id="starting">
+      <div class="container">
+        <h5 class="text-center">Add Feature</h5>
+        <form v-on:submit.prevent="addFeature">
+
+          <div class="form-group">
+            <label>Feature Title</label>
+            <input type="text"
+            class="form-control"
+            id="title"
+            placeholder="Enter Feature Title"
+            v-model="newFeature.title"
+            required="required">
+          </div>
+
+          <div class="form-group">
+            <label>Feature Priority</label>
+            <input type="text"
+            class="form-control"
+            id="title"
+            placeholder="Enter Feature Priority"
+            v-model="newFeature.priority"
+            required="required">
+          </div>
+
+          <div class="form-group">
+            <label>Feature Description</label>
+            <textarea type="text"
+            class="form-control"
+            id="description"
+            placeholder="Enter Feature Description"
+            v-model="newFeature.description"
+            required="required">
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Feature Target Date</label>
+            <input type="Date"
+            class="form-control"
+            id="target-date"
+            placeholder="Enter Feature Target Dade"
+            v-model="newFeature.target_date"
+            required="required">
+          </div>
+
+          <div class="form-group">
+            <label>Client</label>
+            <select type="Date"
+            class="form-control"
+            id="client"
+            placeholder="Enter Feature Client"
+            v-model="newFeature.client"
+            required="required">
+              <option value="A">John Snow</option>
+              <option value="B">Danaerys Targaryen</option>
+              <option value="C">Tyrion Lannister</option>
+              <option value="D">Oberyn Martell</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Product Area</label>
+            <select type="Date"
+            class="form-control"
+            id="product_area"
+            placeholder="Enter Feature Product Area"
+            v-model="newFeature.product_area"
+            required="required">
+              <option value="1">Policies</option>
+              <option value="2">Billing</option>
+              <option value="3">Claims</option>
+              <option value="4">Reports</option>
+            </select>
+          </div>
+
+          <input type="submit" name="">
+      </form>
+      <div class="loading" v-if="loading===true">Loading&#8230;</div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>
+  <script src="/static/js/add-feature.js"></script>
+</body>
+</html>

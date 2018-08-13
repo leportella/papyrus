@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/features/', include(FeatureResource.urls())),
     path('', TemplateView.as_view(template_name='index.html')),
+    path('add/', TemplateView.as_view(template_name='add-feature.html')),
 ]
