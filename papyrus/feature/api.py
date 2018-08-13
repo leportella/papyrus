@@ -13,7 +13,8 @@ class FeatureResource(DjangoResource):
     preparer = FieldsPreparer(fields={
         'priority': 'priority',
         'client': 'get_client_display',
-        'feature_title': 'title',
+        'title': 'title',
+        'target_date': 'target_date',
     })
 
     # removing authentication to make it simpler
@@ -21,7 +22,7 @@ class FeatureResource(DjangoResource):
         return True
 
     def list(self):
-        return Feature.objects.all()
+        return Feature.objects.order_by('target_date').all()
 
     def create(self):
         form = FeatureForm(self.data)
