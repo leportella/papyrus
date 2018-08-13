@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 from feature.api import FeatureResource
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('features/', include(FeatureResource.urls())),
+    path('api/features/', include(FeatureResource.urls())),
+    path('', TemplateView.as_view(template_name='index.html')),
+    path('add/', TemplateView.as_view(template_name='add-feature.html')),
+    path('detail/<slug:id>/',
+         TemplateView.as_view(template_name='feature-detail.html')),
+
 ]

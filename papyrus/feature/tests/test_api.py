@@ -41,7 +41,7 @@ def authenticate(client):
 @pytest.mark.django_db
 def test_list_features(client, user):
     authenticate(client)
-    response = client.get('/features/')
+    response = client.get('/api/features/')
     content = json.loads(response.content)
     assert len(content['objects']) == 2
 
@@ -49,10 +49,10 @@ def test_list_features(client, user):
 @pytest.mark.django_db
 def test_create_feature_reprioritizing(client, user, body):
     authenticate(client)
-    content = post(client, '/features/', body)
+    content = post(client, '/api/features/', body)
 
     assert content['priority'] == 1
-    assert content['feature_title'] == 'new_priority_1'
+    assert content['title'] == 'new_priority_1'
     assert content['client'] == 'John Snow'
 
     assert Feature.objects.get(title='new_priority_1').priority == 1
@@ -72,5 +72,5 @@ def test_create_feature_reprioritizing(client, user, body):
 def test_create_feature_errors(client, user, body, attribute):
     authenticate(client)
     body.pop(attribute)
-    content = post(client, '/features/', body)
+    content = post(client, '/api/features/', body)
     assert content['error'][attribute] == ['This field is required.']

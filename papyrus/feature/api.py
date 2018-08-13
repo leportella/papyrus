@@ -13,14 +13,19 @@ class FeatureResource(DjangoResource):
     preparer = FieldsPreparer(fields={
         'priority': 'priority',
         'client': 'get_client_display',
-        'feature_title': 'title',
+        'title': 'title',
+        'target_date': 'target_date',
+        'product_area': 'get_product_area_display',
+        'description': 'description',
+        'id': 'id',
     })
 
+    # removing authentication to make it simpler
     def is_authenticated(self):
-        return self.request.user.is_authenticated
+        return True
 
     def list(self):
-        return Feature.objects.all()
+        return Feature.objects.order_by('target_date').all()
 
     def create(self):
         form = FeatureForm(self.data)
@@ -34,3 +39,6 @@ class FeatureResource(DjangoResource):
             ).update(priority=F('priority')+1)
             feature = form.save()
         return feature
+
+    def detail(self, pk):
+        return Feature.objects.get(id=pk)

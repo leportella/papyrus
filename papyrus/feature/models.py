@@ -1,3 +1,5 @@
+import uuid
+
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -25,7 +27,7 @@ CLIENTS = (
 
 
 class Feature(models.Model):
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     client = models.CharField(max_length=2, choices=CLIENTS)
     description = models.TextField()
     priority = models.PositiveIntegerField(validators=[MinValueValidator(1)])
