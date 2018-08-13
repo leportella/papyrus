@@ -1,5 +1,5 @@
 new Vue({
-    el: "#starting",
+    el: "#mainframe",
     delimiters: ["${", "}"],
     data: {
         loading: false,
@@ -18,7 +18,7 @@ new Vue({
                 })
                 .catch((err) => {
                     this.loading = false;
-                    //console.log(err)
+                    console.log(err)
                 })
 
             }

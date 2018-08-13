@@ -1,5 +1,5 @@
 new Vue({
-  el: '#starting',
+  el: '#mainframe',
   delimiters: ['${','}'],
   data: {
     features: [],
