@@ -15,6 +15,9 @@ class FeatureResource(DjangoResource):
         'client': 'get_client_display',
         'title': 'title',
         'target_date': 'target_date',
+        'product_area': 'get_product_area_display',
+        'description': 'description',
+        'id': 'id',
     })
 
     # removing authentication to make it simpler
@@ -36,3 +39,6 @@ class FeatureResource(DjangoResource):
             ).update(priority=F('priority')+1)
             feature = form.save()
         return feature
+
+    def detail(self, pk):
+        return Feature.objects.get(id=pk)

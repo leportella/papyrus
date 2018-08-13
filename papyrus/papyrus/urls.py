@@ -24,4 +24,6 @@ urlpatterns = [
     path('api/features/', include(FeatureResource.urls())),
     path('', TemplateView.as_view(template_name='index.html')),
     path('add/', TemplateView.as_view(template_name='add-feature.html')),
+    path('detail/<slug:id>/', TemplateView.as_view(template_name='feature-detail.html')),
+
 ]
