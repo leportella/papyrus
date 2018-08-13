@@ -43,10 +43,13 @@ INSTALLED_APPS = [
 
     # apps
     'feature',
-
-    # 3rd parties
-    'django_extensions',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        # 3rd party
+        'django_extensions'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
