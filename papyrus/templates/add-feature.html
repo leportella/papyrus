@@ -11,7 +11,7 @@
   <body>
     <h1 class="text-center" style="padding: 50px;"> 📜 Welcome to Papyrus 📜</h1>
     <div id="starting">
-      <div class="container">
+      <div class="container" style="width: 60%;">
         <h5 class="text-center">Add Feature</h5>
         <form v-on:submit.prevent="addFeature">
 
@@ -86,8 +86,18 @@
             </select>
           </div>
 
-          <input type="submit" name="">
-      </form>
+          <input type="submit" 
+                 value="Add" 
+                 class="btn btn-primary" 
+                 style="margin: 20px; background-color: #9a7755; border: #9a7755">
+          <a href="/">
+            <button  type="button" 
+               class="btn btn-primary" 
+               style="margin: 20px; background-color: #9a7755; border: #9a7755">
+              All Features
+            </button>
+          </a>
+        </form>
       <div class="loading" v-if="loading===true">Loading&#8230;</div>
     </div>
   </div>
