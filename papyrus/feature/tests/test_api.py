@@ -52,7 +52,7 @@ def test_create_feature_reprioritizing(client, user, body):
     content = post(client, '/api/features/', body)
 
     assert content['priority'] == 1
-    assert content['feature_title'] == 'new_priority_1'
+    assert content['title'] == 'new_priority_1'
     assert content['client'] == 'John Snow'
 
     assert Feature.objects.get(title='new_priority_1').priority == 1
