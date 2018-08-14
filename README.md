@@ -4,6 +4,10 @@ A app for requesting a new feature on a software.
 
 The app is available [here](https://lele-papyrus.herokuapp.com/).
 
+This app will be able to add features by clients. If a client sets a feature 
+as priority 1, it will become the first priority in his/hers list. If another 
+feature was set as priority 1 it will loose priority, and become the second. The 
+second will become the third and so on. 
 
 ## Development
 
