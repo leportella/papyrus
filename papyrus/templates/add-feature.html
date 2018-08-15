@@ -13,6 +13,12 @@
     <div id="mainframe">
       <div class="container" style="width: 60%;">
         <h5 class="text-center">Add Feature</h5>
+        <div class="alert alert-warning" v-if="errors.length">
+          <b>Please correct the following error(s):</b>
+          <ul>
+           <li v-for="error in errors">${error}</li>
+          </ul>
+        </div>
         <form v-on:submit.prevent="addFeature">
           <div class="form-group">
             <label>Feature Title</label>
