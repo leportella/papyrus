@@ -1,8 +1,8 @@
 from restless.dj import DjangoResource
+from restless.exceptions import BadRequest
 from restless.preparers import FieldsPreparer
 
 from django.db import transaction
-from django.forms import ValidationError
 from django.db.models import F
 
 from .forms import FeatureForm
@@ -30,7 +30,7 @@ class FeatureResource(DjangoResource):
     def create(self):
         form = FeatureForm(self.data)
         if not form.is_valid():
-            raise ValidationError(form.errors)
+            raise BadRequest(form.errors)
 
         with transaction.atomic():
             Feature.objects.filter(
